@@ -5,8 +5,7 @@ import hw6.Task6;
 import org.junit.jupiter.api.Test;
 public class Task6Test {
     @Test
-    public void testCountK()
-    {
+    public void testCountK() {
         assertEquals(3, Task6.countK(3524));
         assertEquals(5, Task6.countK(6621));
         assertEquals(4, Task6.countK(6554));
