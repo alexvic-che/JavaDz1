@@ -1,39 +1,42 @@
 package hw1;
-
+import java.util.Scanner;
 public class Task1 {
-    public static int getVideoLengthInSeconds(String timeString) {
-        // Разделить строку на минуты и секунды
-        String[] parts = timeString.split(":");
 
-        // Убедиться, что есть две части (минуты и секунды)
-        if (parts.length != 2) {
-            return -1; // Некорректный формат
-        }
+        public static int convertToSeconds(String time) {
+            // Разделение строки на минуты и секунды
+            String[] timeComponents = time.split(":");
 
-        try {
-            int minutes = Integer.parseInt(parts[0]);
-            int seconds = Integer.parseInt(parts[1]);
-
-            // Проверить, что секунды меньше 60
-            if (seconds >= 60) {
-                return -1; // Некорректный формат
+            // Проверка на корректное количество компонентов
+            if (timeComponents.length != 2)  {
+                return -1;
             }
 
-            // Вычислить общую длину видео в секундах
-            return minutes * 60 + seconds;
-        } catch (NumberFormatException e) {
-            return -1; // Некорректный формат (не удалось преобразовать в числа)
-        }
-    }
+            try {
+                // Преобразование минут и секунд в целочисленные значения
+                int minutes = Integer.parseInt(timeComponents[0]);
+                int seconds = Integer.parseInt(timeComponents[1]);
 
-    public static void main(String[] args) {
-        String timeString = "10:60";
-        int videoLengthInSeconds = getVideoLengthInSeconds(timeString);
+                // Проверка на корректные значения минут и секунд
+                if (seconds >= 60) {
+                    return -1;
+                }
 
-        if (videoLengthInSeconds != -1) {
-            System.out.println("Общая длина видео в секундах: " + videoLengthInSeconds);
-        } else {
-            System.out.println("-1.");
+                // Вычисление общего времени в секундах
+                return minutes * 60 + seconds;
+            } catch (NumberFormatException e) {
+                // Обработка ошибки преобразования строки в число
+                return -1;
+            }
         }
-    }
+
+        public static void main(String[] args) {
+            // Пример использования функции
+//        String videoLength = "999:59";
+            Scanner in = new Scanner(System.in);
+            String videoLength = in.nextLine();
+            int totalSeconds = convertToSeconds(videoLength);
+
+            System.out.println(totalSeconds);
+        }
+
 }

@@ -1,29 +1,27 @@
 package hw2;
-
+import java.util.Scanner;
 public class Task2 {
     public static int countDigits(int number) {
-        // Если число отрицательное, преобразуйте его в положительное
-        if (number < 0) {
-            number = -number;
+        // Обработка случая с нулем
+        if (number == 0) {
+            return 1;
         }
 
-        // Инициализируйте счетчик цифр
-        int digitCount = 1; // По умолчанию, у нас есть хотя бы одна цифра (0)
-
-        // Пока число больше 0, увеличивайте счетчик цифр и делим число на 10
-        while (number > 0) {
-            number /= 10;
-            if (number > 0) {
-                digitCount++;
-            }
+        int count = 0;
+        // Используем Math.abs() для обработки отрицательных чисел
+        int n = Math.abs(number);
+        System.out.println(n);
+        while (n > 0) {
+            n = n / 10;
+            count++;
         }
 
-        return digitCount;
+        return count;
     }
 
     public static void main(String[] args) {
-        int number = 4666;
-        int digitCount = countDigits(number);
-        System.out.println("Количество цифр в числе " + number + " равно " + digitCount);
+        Scanner in = new Scanner(System.in);
+        int inoutNumber = in.nextInt();
+        System.out.println(countDigits(inoutNumber));
     }
 }

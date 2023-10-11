@@ -2,19 +2,45 @@ package hw7;
 
 public class Task7 {
 
-    public static int rotateLeft(int n, int shift) {
-        shift %= 32; // Убедимся, что сдвиг находится в пределах 32 бит
-        return (n << shift) | (n >>> (32 - shift));
-    }
+        public static void main(String[] args) {
+            // Пример вызова функции rotateRight с параметрами 16 и 1
 
-    public static int rotateRight(int n, int shift) {
-        shift %= 32; // Убедимся, что сдвиг находится в пределах 32 бит
-        return (n >>> shift) | (n << (32 - shift));
-    }
+            int[] resultRight = rotateRight(8, 1);
 
-    public static void main(String[] args) {
-        System.out.println(rotateRight(8, 1));  // 1000 -> 0100
-        System.out.println(rotateLeft(16, 1));  // 10000 -> 00001
-        System.out.println(rotateLeft(17, 2));  // 10001 -> 00110
+
+            // Пример вызова функции rotateLeft с параметрами 16 и 1
+            int[] resultLeft = rotateLeft(16, 1);
+
+        }
+
+        // Функция для сдвига числа вправо
+        public static int[] rotateRight(int n, int shift) {
+            String binaryStr = Integer.toBinaryString(n);
+            int len = binaryStr.length();
+            int shiftAmount = shift % len;
+            String rotatedBinaryStr = binaryStr.substring(len - shiftAmount) + binaryStr.substring(0, len - shiftAmount);
+            int sum = Integer.parseInt(rotatedBinaryStr, 2);
+
+            // Вывод результатов
+            System.out.println("rotateRight: " + sum + " " + binaryStr + " " + rotatedBinaryStr);
+
+            // Возвращаем результат в виде массива
+            return new int[]{sum, n, Integer.parseInt(rotatedBinaryStr, 2)};
+        }
+
+        // Функция для сдвига числа влево
+        public static int[] rotateLeft(int n, int shift) {
+            String binaryStr = Integer.toBinaryString(n);
+            int len = binaryStr.length();
+            int shiftAmount = shift % len;
+            String rotatedBinaryStr = binaryStr.substring(shiftAmount) + binaryStr.substring(0, shiftAmount);
+            int sum = Integer.parseInt(rotatedBinaryStr, 2);
+
+            // Вывод результатов
+            System.out.println("rotateLeft: " + sum + " " + binaryStr + " " + rotatedBinaryStr);
+
+            // Возвращаем результат в виде массива
+            return new int[]{sum, n, Integer.parseInt(rotatedBinaryStr, 2)};
+        }
+
     }
-}
