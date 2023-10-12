@@ -1,8 +1,8 @@
-package hw6;
-import static org.junit.jupiter.api.Assertions.*;
+package hw1;
 
-import hw6.Task6;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class Task6Test {
     @Test
     public void testCountK() {

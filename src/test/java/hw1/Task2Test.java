@@ -1,6 +1,9 @@
-package hw2;
+package hw1;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class Task2Test {
     @Test
     public void testCountDigitsPositiveNumber() {

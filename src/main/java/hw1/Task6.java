@@ -1,5 +1,6 @@
-package hw6;
+package hw1;
 import java.util.Arrays;
+
 public class Task6 {
     public static int countK(int number) {
         // Проверка, что число больше 1000 и не все его цифры одинаковы

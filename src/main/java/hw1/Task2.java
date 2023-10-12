@@ -1,5 +1,6 @@
-package hw2;
+package hw1;
 import java.util.Scanner;
+
 public class Task2 {
     public static int countDigits(int number) {
         // Обработка случая с нулем

@@ -1,6 +1,7 @@
-package hw5;
+package hw1;
+
 import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class Task5Test
 {
