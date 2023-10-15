@@ -7,27 +7,33 @@ public class Viselitsa {
     private static final String[] WORDS = {"hello", "world", "java", "programming", "hangman"};
     private static final int MAX_MISTAKES = 5;
 
+    // Проверка, что длина слова находится в допустимом диапазоне
     public boolean isWordLengthValid(String word) {
         return word.length() >= 3 && word.length() <= 12;
     }
 
+    // Проверка, проиграна ли игра
     public boolean isGameLost(int mistakes, int maxMistakes) {
         return mistakes >= maxMistakes;
     }
 
+    // Проверка, выиграна ли игра
     public boolean isGameWon(String word, char[] guessedWord) {
         return String.valueOf(guessedWord).equals(word);
     }
 
-    public static  boolean isInputValid(String input) {
+    // Проверка, что ввод состоит из одной буквы
+    public static boolean isInputValid(String input) {
         return input.length() == 1;
     }
 
+    // Выбор случайного слова из словаря
     private static String getRandomWord(String[] words) {
         Random random = new Random();
         return words[random.nextInt(words.length)];
     }
 
+    // Обновление угадываемого слова
     private static void updateGuessedWord(String word, char[] guessedWord, char guess) {
         for (int i = 0; i < word.length(); i++) {
             if (word.charAt(i) == guess) {
@@ -42,6 +48,7 @@ public class Viselitsa {
         char[] guessedWord = new char[wordToGuess.length()];
         int mistakes = 0;
 
+        // Заполняем массив символами '*', чтобы скрыть слово
         for (int i = 0; i < wordToGuess.length(); i++) {
             guessedWord[i] = '*';
         }
@@ -85,6 +92,7 @@ public class Viselitsa {
         }
     }
 
+    // Вывод текущего состояния игры
     private static void printGameState(char[] guessedWord, int mistakes) {
         System.out.println("\n> The word: " + String.valueOf(guessedWord));
         System.out.println("\n> Missed, mistake " + mistakes + " out of " + MAX_MISTAKES + ".\n");
