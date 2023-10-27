@@ -1,5 +1,6 @@
 package hw3;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 public class Task5 {
@@ -44,16 +45,39 @@ public class Task5 {
         }
 
         if (sortOrder.equals("ASC")) {
-            contacts.sort(Comparator.comparing(Contact::getLastName).thenComparing(Contact::getFirstName));
+            Collections.sort(contacts, Comparator.comparing(Contact::getLastName).thenComparing(Contact::getFirstName));
         } else if (sortOrder.equals("DESC")) {
-            contacts.sort(Comparator.comparing(Contact::getLastName).reversed().thenComparing(Contact::getFirstName).reversed());
+            Collections.sort(contacts, Comparator.comparing(Contact::getLastName, Comparator.reverseOrder()).thenComparing(Contact::getFirstName, Comparator.reverseOrder()));
         }
 
         return contacts;
     }
 
     public static void main(String[] args) {
-        System.out.println();
+        // Примеры использования
+        String[] names1 = {"John Locke", "Thomas Aquinas", "David Hume", "Rene Descartes"};
+        String sortOrder1 = "ASC";
+        List<Contact> sortedContacts1 = parseContacts(names1, sortOrder1);
+        System.out.println(sortedContacts1);
 
+        String[] names2 = {"Paul Erdos", "Leonhard Euler", "Carl Gauss"};
+        String sortOrder2 = "DESC";
+        List<Contact> sortedContacts2 = parseContacts(names2, sortOrder2);
+        System.out.println(sortedContacts2);
+
+        String[] names3 = {};
+        String sortOrder3 = "DESC";
+        List<Contact> sortedContacts3 = parseContacts(names3, sortOrder3);
+        System.out.println(sortedContacts3);
+
+        String[] names4 = null;
+        String sortOrder4 = "DESC";
+        List<Contact> sortedContacts4 = parseContacts(names4, sortOrder4);
+        System.out.println(sortedContacts4);
     }
 }
+
+
+
+
+
