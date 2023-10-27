@@ -1,3 +1,5 @@
+package hw3;
+
 import hw3.Task5;
 import hw3.Task5.Contact;
 import org.junit.jupiter.api.Test;
