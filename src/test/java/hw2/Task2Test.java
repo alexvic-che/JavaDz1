@@ -13,7 +13,7 @@ class Task2Test
     }
     @Test
     public void SquareAreaTest() {
-        var square = new Task2.Square(4);
+        var square = new Task2.Square(4,4);
         var result = square.area();
         assertEquals(16, result);
     }
