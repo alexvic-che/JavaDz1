@@ -1,12 +1,11 @@
 package hw2;
 
-public class Task2
-{
+public class Task2 {
     // Интерфейс Shape определяет общие методы и свойства для фигур.
     public interface Shape {
-        int getWidth();    // Метод для получения ширины фигуры.
-        int getHeight();   // Метод для получения высоты фигуры.
-        double area();     // Метод для вычисления площади фигуры.
+        int getWidth();
+        int getHeight();
+        double area();
     }
 
     // Класс Rectangle реализует интерфейс Shape и представляет прямоугольник.
@@ -36,37 +35,24 @@ public class Task2
         }
     }
 
-    // Класс Square также реализует интерфейс Shape и представляет квадрат.
-    public static class Square implements Shape {
-        private final int side;
-
-        // Конструктор для создания квадрата с заданной стороной.
-        public Square(int side) {
-            this.side = side;
+    public static class Square extends Rectangle {
+        private  int side;
+        public Square(int width, int height) {
+            super(width, height);
+            this.side = width;
+            this.side = height;
         }
 
-        // Реализация метода getWidth для квадрата (возвращает сторону).
-        public int getWidth() {
+        public int getSide(){
             return side;
-        }
-
-        // Реализация метода getHeight для квадрата (возвращает сторону).
-        public int getHeight() {
-            return side;
-        }
-
-        // Реализация метода area для вычисления площади квадрата.
-        public double area() {
-            return side * side;
         }
     }
 
     public static void main(String[] args) {
         var rectangle = new Rectangle( 4 ,7);
-        var square = new Square(4);
+        var square = new Square(4,4);
 
         System.out.println(rectangle.area() );
         System.out.println(square.area() );
     }
-
 }
