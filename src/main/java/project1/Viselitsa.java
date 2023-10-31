@@ -8,9 +8,22 @@ public class Viselitsa {
     private static final int MAX_MISTAKES = 5;
 
     private String wordToGuess;
-    private char[] guessedWord;
+    char[] guessedWord;
     private int mistakes;
+    private void handleCorrectGuess(char guess) {
+        updateGuessedWord(guess);
+        if (isGameWon()) {
+            printGameState();
+            System.out.println("You won!");
 
+        }
+    }
+
+    private void handleWrongGuess() {
+        mistakes++;
+        printGameState();
+        System.out.println("Missed, mistake " + mistakes + " out of " + MAX_MISTAKES + ".");
+    }
     public Viselitsa() {
         this.wordToGuess = getRandomWord(WORDS);
         this.guessedWord = new char[wordToGuess.length()];
@@ -43,13 +56,13 @@ public class Viselitsa {
     }
 
     // Выбор случайного слова из словаря
-    private static String getRandomWord(String[] words) {
+    static String getRandomWord(String[] words) {
         Random random = new Random();
         return words[random.nextInt(words.length)];
     }
 
     // Обновление угадываемого слова
-    private void updateGuessedWord(char guess) {
+    void updateGuessedWord(char guess) {
         for (int i = 0; i < wordToGuess.length(); i++) {
             if (wordToGuess.charAt(i) == guess) {
                 guessedWord[i] = guess;
@@ -80,16 +93,9 @@ public class Viselitsa {
             char guess = input.charAt(0);
 
             if (wordToGuess.contains(String.valueOf(guess))) {
-                updateGuessedWord(guess);
-                if (isGameWon()) {
-                    printGameState();
-                    System.out.println("You won!");
-                    break;
-                }
+                handleCorrectGuess(guess);
             } else {
-                mistakes++;
-                printGameState();
-                System.out.println("Missed, mistake " + mistakes + " out of " + MAX_MISTAKES + ".");
+                handleWrongGuess();
             }
         }
 
