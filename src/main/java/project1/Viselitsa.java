@@ -7,19 +7,34 @@ public class Viselitsa {
     private static final String[] WORDS = {"hello", "world", "java", "programming", "hangman"};
     private static final int MAX_MISTAKES = 5;
 
+    private String wordToGuess;
+    private char[] guessedWord;
+    private int mistakes;
+
+    public Viselitsa() {
+        this.wordToGuess = getRandomWord(WORDS);
+        this.guessedWord = new char[wordToGuess.length()];
+        this.mistakes = 0;
+
+        // Заполняем массив символами '*', чтобы скрыть слово
+        for (int i = 0; i < wordToGuess.length(); i++) {
+            guessedWord[i] = '*';
+        }
+    }
+
     // Проверка, что длина слова находится в допустимом диапазоне
     public boolean isWordLengthValid(String word) {
         return word.length() >= 3 && word.length() <= 12;
     }
 
     // Проверка, проиграна ли игра
-    public boolean isGameLost(int mistakes, int maxMistakes) {
-        return mistakes >= maxMistakes;
+    public boolean isGameLost() {
+        return mistakes >= MAX_MISTAKES;
     }
 
     // Проверка, выиграна ли игра
-    public boolean isGameWon(String word, char[] guessedWord) {
-        return String.valueOf(guessedWord).equals(word);
+    public boolean isGameWon() {
+        return String.valueOf(guessedWord).equals(wordToGuess);
     }
 
     // Проверка, что ввод состоит из одной буквы
@@ -34,29 +49,21 @@ public class Viselitsa {
     }
 
     // Обновление угадываемого слова
-    private static void updateGuessedWord(String word, char[] guessedWord, char guess) {
-        for (int i = 0; i < word.length(); i++) {
-            if (word.charAt(i) == guess) {
+    private void updateGuessedWord(char guess) {
+        for (int i = 0; i < wordToGuess.length(); i++) {
+            if (wordToGuess.charAt(i) == guess) {
                 guessedWord[i] = guess;
             }
         }
     }
 
-    public static void main(String[] args) {
+    public void play() {
         Scanner scanner = new Scanner(System.in);
-        String wordToGuess = getRandomWord(WORDS);
-        char[] guessedWord = new char[wordToGuess.length()];
-        int mistakes = 0;
-
-        // Заполняем массив символами '*', чтобы скрыть слово
-        for (int i = 0; i < wordToGuess.length(); i++) {
-            guessedWord[i] = '*';
-        }
 
         System.out.println("Welcome to Viselitsa!");
-        printGameState(guessedWord, mistakes);
+        printGameState();
 
-        while (mistakes < MAX_MISTAKES) {
+        while (!isGameLost()) {
             System.out.print("Guess a letter or type 'surrender' to give up: ");
             String input = scanner.nextLine();
 
@@ -73,29 +80,33 @@ public class Viselitsa {
             char guess = input.charAt(0);
 
             if (wordToGuess.contains(String.valueOf(guess))) {
-                updateGuessedWord(wordToGuess, guessedWord, guess);
-                if (String.valueOf(guessedWord).equals(wordToGuess)) {
-                    printGameState(guessedWord, mistakes);
+                updateGuessedWord(guess);
+                if (isGameWon()) {
+                    printGameState();
                     System.out.println("You won!");
                     break;
                 }
             } else {
                 mistakes++;
-                printGameState(guessedWord, mistakes);
+                printGameState();
                 System.out.println("Missed, mistake " + mistakes + " out of " + MAX_MISTAKES + ".");
             }
         }
 
-        if (mistakes == MAX_MISTAKES) {
-            printGameState(guessedWord, mistakes);
+        if (isGameLost()) {
+            printGameState();
             System.out.println("You lost! The word was: " + wordToGuess);
         }
     }
 
     // Вывод текущего состояния игры
-    private static void printGameState(char[] guessedWord, int mistakes) {
+    private void printGameState() {
         System.out.println("\n> The word: " + String.valueOf(guessedWord));
         System.out.println("\n> Missed, mistake " + mistakes + " out of " + MAX_MISTAKES + ".\n");
     }
-}
 
+    public static void main(String[] args) {
+        Viselitsa game = new Viselitsa();
+        game.play();
+    }
+}
