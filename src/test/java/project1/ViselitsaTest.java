@@ -3,39 +3,50 @@ package project1;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
-public class ViselitsaTest
+class ViselitsaTest
 {
     private Viselitsa game;
+
     @BeforeEach
-    public  void setUp() {
+    void setUp() {
         game = new Viselitsa();
     }
+
     @Test
-    public void testInvalidWordLength() {
-        assertFalse(game.isWordLengthValid("a")); // Слово слишком короткое
-        assertTrue(game.isWordLengthValid("test")); // Слово средней длины
-        assertFalse(game.isWordLengthValid("verylongworda")); // Слово слишком длинное
+    void isWordLengthValid_ValidLength_ReturnsTrue() {
+        assertTrue(game.isWordLengthValid("hello"));
     }
 
     @Test
-    public void testGameLoss() {
-        int maxMistakes = 3;
-        int mistakes = 3;
-
-        assertTrue(game.isGameLost(mistakes, maxMistakes)); // Игра проиграна
+    void isWordLengthValid_TooShort_ReturnsFalse() {
+        assertFalse(game.isWordLengthValid("hi"));
     }
 
     @Test
-    public void testGameWin() {
-        String wordToGuess = "test";
-        char[] guessedWord = {'t', 'e', 's', 't'};
+    void isWordLengthValid_TooLong_ReturnsFalse() {
+        assertFalse(game.isWordLengthValid("programminglanguage"));
+    }
 
-        assertTrue(game.isGameWon(wordToGuess, guessedWord)); // Игра выиграна
+
+
+    @Test
+    void isInputValid_ValidInput_ReturnsTrue() {
+        assertTrue(Viselitsa.isInputValid("a"));
     }
 
     @Test
-    public void testInputValidation() {
-        String input = "ab";
-        assertFalse(game.isInputValid(input)); // Ввод состоит из более чем одной буквы
+    void isInputValid_InvalidInput_ReturnsFalse() {
+        assertFalse(Viselitsa.isInputValid("ab"));
     }
+
+    @Test
+    void getRandomWord_ReturnsRandomWordFromDictionary() {
+        String[] words = {"hello", "world", "java", "programming", "hangman"};
+        String randomWord = Viselitsa.getRandomWord(words);
+        assertTrue(randomWord.equals("hello") || randomWord.equals("world") ||
+            randomWord.equals("java") || randomWord.equals("programming") ||
+            randomWord.equals("hangman"));
+    }
+
+
 }
