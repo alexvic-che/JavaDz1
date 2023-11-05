@@ -1,8 +1,8 @@
 package project2;
 
 public class Mazes {
-    static final int ROWS = 4;
-    static final int COLS = 4;
+    static final int ROWS = 20;
+    static final int COLS = 20;
 
     public static void main(String [] args)
     {
