@@ -19,7 +19,7 @@ public class Task6 {
 
             System.out.println("TCP\t" + port + "\t" + getServiceName(port));
         } catch (IOException e) {
-            // Port is not in use
+
             System.out.println("UDP\t" + port + "\t" + getServiceName(port));
         }
     }
